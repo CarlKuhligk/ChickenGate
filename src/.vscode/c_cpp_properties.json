@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceRoot}/**",
+                "C:/Program Files (x86)/Arduino/**",
+                "C:/Users/Carl Kuhligk/Documents/Arduino/libraries/**",
+                "C:/Users/Carl Kuhligk/AppData/Local/Arduino15/packages/**"
+                
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": false,
+                "path": [
+                    "C:/Users/Carl Kuhligk/AppData/Local/Arduino15/packages/esp32/hardware/esp32/1.0.6/libraries",
+                    "C:/Users/Carl Kuhligk/AppData/Local/Arduino15/packages/esp32/hardware/esp32/1.0.6/tools/sdk/include",
+                    "${workspaceRoot}"
+                ]
+            },
+            "compilerPath": "C:/Program Files (x86)/Arduino/hardware/tools/avr/bin/avr-gcc.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}

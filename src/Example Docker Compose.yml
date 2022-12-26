@@ -1,0 +1,39 @@
+version: "3"
+services:
+  mqtt:
+    container_name: mqqt
+    restart: always
+    image: eclipse-mosquitto:latest
+    volumes:
+      - mosquitto:/mosquitto
+
+    ports:
+      - 1883:1883
+      
+# NOTE
+# edit configfile in /etc/mosquitto
+# #allow_anonymous -> allow_anonymous true
+# #listener        -> listener 1883
+
+      
+  node-red:
+    container_name: node-red
+    restart: always
+    depends_on:
+      - mqtt
+    image: nodered/node-red:latest
+    volumes:
+      - node-red:/data
+    user: "0"
+
+    ports:
+      - 1880:1880
+
+    environment:
+      - TZ=Europe/Berlin
+      - NODE_RED_ENABLE_PROJECTS=true 
+
+      
+volumes:
+  mosquitto:
+  node-red:

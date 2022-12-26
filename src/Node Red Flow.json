@@ -1,0 +1,1800 @@
+[
+    {
+        "id": "4246be2ad9225d34",
+        "type": "tab",
+        "label": "GateController",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "9ad464d0dfa786e7",
+        "type": "mqtt out",
+        "z": "4246be2ad9225d34",
+        "name": "Control",
+        "topic": "GateControl",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b645df176e452dbc",
+        "x": 2760,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "3ca7074f5dbbd2c9",
+        "type": "ui_button",
+        "z": "4246be2ad9225d34",
+        "name": "",
+        "group": "936e1e4f72a9d5af",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Öffnen",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "open",
+        "payloadType": "str",
+        "topic": "manual",
+        "topicType": "str",
+        "x": 2210,
+        "y": 780,
+        "wires": [
+            [
+                "f6f4146136ebd92e"
+            ]
+        ]
+    },
+    {
+        "id": "82f20472daf5f4ba",
+        "type": "ui_switch",
+        "z": "4246be2ad9225d34",
+        "name": "",
+        "label": "Automatik",
+        "tooltip": "",
+        "group": "6ea7bc03a327e910",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "enable",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 840,
+        "y": 700,
+        "wires": [
+            [
+                "5c1060846319b0cc",
+                "345e0977745f245c",
+                "f52f72ab08a7d97d",
+                "9127fb3d6e1bba72"
+            ]
+        ]
+    },
+    {
+        "id": "89eb607eef99fd65",
+        "type": "ui_button",
+        "z": "4246be2ad9225d34",
+        "name": "",
+        "group": "936e1e4f72a9d5af",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Schließen",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "close",
+        "payloadType": "str",
+        "topic": "manual",
+        "topicType": "str",
+        "x": 2200,
+        "y": 820,
+        "wires": [
+            [
+                "f6f4146136ebd92e"
+            ]
+        ]
+    },
+    {
+        "id": "392ea841002fcbf5",
+        "type": "ui_text",
+        "z": "4246be2ad9225d34",
+        "group": "fe2a2867070506ee",
+        "order": 4,
+        "width": 5,
+        "height": 1,
+        "name": "",
+        "label": "Zustand:",
+        "format": "{{msg.state}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 2940,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "5c1060846319b0cc",
+        "type": "function",
+        "z": "4246be2ad9225d34",
+        "name": "Toggle Button",
+        "func": "var input = msg.payload ? false: true;\nreturn {enabled : input};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 780,
+        "wires": [
+            [
+                "3ca7074f5dbbd2c9"
+            ]
+        ]
+    },
+    {
+        "id": "ea0c4ae972fb10c6",
+        "type": "ui_text",
+        "z": "4246be2ad9225d34",
+        "group": "fe2a2867070506ee",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Modus:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 1220,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "0ac701293b1286f3",
+        "type": "ui_text",
+        "z": "4246be2ad9225d34",
+        "group": "fe2a2867070506ee",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Schließt um:",
+        "format": "{{msg.time}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 2590,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "390bfbcace314a8a",
+        "type": "ui_text",
+        "z": "4246be2ad9225d34",
+        "group": "fe2a2867070506ee",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Öffnet um:",
+        "format": "{{msg.time}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 2590,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "345e0977745f245c",
+        "type": "function",
+        "z": "4246be2ad9225d34",
+        "name": "String Man/Aut",
+        "func": "var opt1 = 'Handbetrieb';\nvar opt2 = 'Automatikbetrieb ';\nreturn {payload : msg.payload ? opt2 : opt1}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 640,
+        "wires": [
+            [
+                "ea0c4ae972fb10c6"
+            ]
+        ]
+    },
+    {
+        "id": "068d0c70bde10387",
+        "type": "ui_text_input",
+        "z": "4246be2ad9225d34",
+        "name": "OpenFrom",
+        "label": "(1) Öffnen ab",
+        "tooltip": "",
+        "group": "6ea7bc03a327e910",
+        "order": 2,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "mode": "time",
+        "delay": 300,
+        "topic": "openfrom",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "str",
+        "x": 1290,
+        "y": 420,
+        "wires": [
+            [
+                "0e947fc79d73bb0b"
+            ]
+        ]
+    },
+    {
+        "id": "2bd962fc721c32f5",
+        "type": "ui_text_input",
+        "z": "4246be2ad9225d34",
+        "name": "CloseFrom",
+        "label": "(3) Schließen ab",
+        "tooltip": "",
+        "group": "6ea7bc03a327e910",
+        "order": 6,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "mode": "time",
+        "delay": 300,
+        "topic": "closefrom",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "str",
+        "x": 1290,
+        "y": 500,
+        "wires": [
+            [
+                "0d1fbc0605b8e17f"
+            ]
+        ]
+    },
+    {
+        "id": "0d1fbc0605b8e17f",
+        "type": "change",
+        "z": "4246be2ad9225d34",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "settings.closeFrom",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1520,
+        "y": 500,
+        "wires": [
+            [
+                "1b669ae440dae0e1"
+            ]
+        ]
+    },
+    {
+        "id": "0e947fc79d73bb0b",
+        "type": "change",
+        "z": "4246be2ad9225d34",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "settings.openFrom",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1520,
+        "y": 420,
+        "wires": [
+            [
+                "1b669ae440dae0e1"
+            ]
+        ]
+    },
+    {
+        "id": "92f543c6f93faf6a",
+        "type": "ui_text_input",
+        "z": "4246be2ad9225d34",
+        "name": "OpenUntil",
+        "label": "(2) Öffnen bis",
+        "tooltip": "",
+        "group": "6ea7bc03a327e910",
+        "order": 4,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "mode": "time",
+        "delay": 300,
+        "topic": "openuntil",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "str",
+        "x": 1300,
+        "y": 460,
+        "wires": [
+            [
+                "ad803f1697fe4e97"
+            ]
+        ]
+    },
+    {
+        "id": "ad803f1697fe4e97",
+        "type": "change",
+        "z": "4246be2ad9225d34",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "settings.openUntil",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1520,
+        "y": 460,
+        "wires": [
+            [
+                "1b669ae440dae0e1"
+            ]
+        ]
+    },
+    {
+        "id": "c523394e0d82e04f",
+        "type": "ui_text_input",
+        "z": "4246be2ad9225d34",
+        "name": "CloseUntil",
+        "label": "(4) Schließen bis",
+        "tooltip": "",
+        "group": "6ea7bc03a327e910",
+        "order": 8,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "mode": "time",
+        "delay": 300,
+        "topic": "closeuntil",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "str",
+        "x": 1290,
+        "y": 540,
+        "wires": [
+            [
+                "f48e7966b1b83272"
+            ]
+        ]
+    },
+    {
+        "id": "f48e7966b1b83272",
+        "type": "change",
+        "z": "4246be2ad9225d34",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "settings.closeUntil",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1520,
+        "y": 540,
+        "wires": [
+            [
+                "1b669ae440dae0e1"
+            ]
+        ]
+    },
+    {
+        "id": "f52f72ab08a7d97d",
+        "type": "function",
+        "z": "4246be2ad9225d34",
+        "name": "Toggle Button",
+        "func": "var input = msg.payload ? false: true;\nreturn {enabled : input};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 820,
+        "wires": [
+            [
+                "89eb607eef99fd65"
+            ]
+        ]
+    },
+    {
+        "id": "f409f6ad89d70c5c",
+        "type": "time-inject",
+        "z": "4246be2ad9225d34",
+        "name": "RemainingTimeUpdate",
+        "nameInt": "Zeitpunkt ↻1s",
+        "positionConfig": "4acc508184d7ff79",
+        "props": [
+            {
+                "p": "",
+                "pt": "msgPayload",
+                "v": "",
+                "vt": "date",
+                "o": "",
+                "oT": "none",
+                "oM": "60000",
+                "f": 3,
+                "fS": 3,
+                "fT": "lokale Zeit",
+                "fI": "3",
+                "next": true,
+                "days": "*",
+                "months": "*",
+                "onlyOddDays": false,
+                "onlyEvenDays": false,
+                "onlyOddWeeks": false,
+                "onlyEvenWeeks": false
+            }
+        ],
+        "injectTypeSelect": "interval",
+        "intervalCount": 1,
+        "intervalCountType": "num",
+        "intervalCountMultiplier": 1000,
+        "time": "",
+        "timeType": "entered",
+        "offset": 0,
+        "offsetType": "none",
+        "offsetMultiplier": 60000,
+        "timeEnd": "",
+        "timeEndType": "entered",
+        "timeEndOffset": 0,
+        "timeEndOffsetType": "none",
+        "timeEndOffsetMultiplier": 60000,
+        "timeDays": "*",
+        "timeOnlyOddDays": false,
+        "timeOnlyEvenDays": false,
+        "timeOnlyOddWeeks": false,
+        "timeOnlyEvenWeeks": false,
+        "timeMonths": "*",
+        "timedatestart": "",
+        "timedateend": "",
+        "property": "",
+        "propertyType": "none",
+        "propertyCompare": "true",
+        "propertyThreshold": "",
+        "propertyThresholdType": "num",
+        "timeAlt": "",
+        "timeAltType": "entered",
+        "timeAltDays": "*",
+        "timeAltOnlyOddDays": false,
+        "timeAltOnlyEvenDays": false,
+        "timeAltOnlyOddWeeks": false,
+        "timeAltOnlyEvenWeeks": false,
+        "timeAltMonths": "*",
+        "timeAltOffset": 0,
+        "timeAltOffsetType": "none",
+        "timeAltOffsetMultiplier": 60000,
+        "once": false,
+        "onceDelay": 0.1,
+        "recalcTime": 2,
+        "x": 1540,
+        "y": 600,
+        "wires": [
+            [
+                "1b669ae440dae0e1"
+            ]
+        ]
+    },
+    {
+        "id": "bf58ed987bd5aa39",
+        "type": "ui_ui_control",
+        "z": "4246be2ad9225d34",
+        "name": "Save",
+        "events": "all",
+        "x": 810,
+        "y": 320,
+        "wires": [
+            [
+                "c3fd3c22a69796e1"
+            ]
+        ]
+    },
+    {
+        "id": "97b29e2ddae082bb",
+        "type": "ui_ui_control",
+        "z": "4246be2ad9225d34",
+        "name": "Load",
+        "events": "connect",
+        "x": 810,
+        "y": 280,
+        "wires": [
+            [
+                "f5053f6b2f2728aa"
+            ]
+        ]
+    },
+    {
+        "id": "9a4addaa42067cc6",
+        "type": "file",
+        "z": "4246be2ad9225d34",
+        "name": "SaveFile",
+        "filename": "settings.json",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 1160,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f5053f6b2f2728aa",
+        "type": "file in",
+        "z": "4246be2ad9225d34",
+        "name": "ReadFile",
+        "filename": "settings.json",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 1160,
+        "y": 280,
+        "wires": [
+            [
+                "e42a1cf3014ba30a"
+            ]
+        ]
+    },
+    {
+        "id": "c3fd3c22a69796e1",
+        "type": "change",
+        "z": "4246be2ad9225d34",
+        "name": "GetFlowSettings",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "settings",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 980,
+        "y": 320,
+        "wires": [
+            [
+                "9a4addaa42067cc6"
+            ]
+        ]
+    },
+    {
+        "id": "3d793abcf663d0d1",
+        "type": "change",
+        "z": "4246be2ad9225d34",
+        "name": "SetFlowSettings",
+        "rules": [
+            {
+                "t": "set",
+                "p": "settings",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1480,
+        "y": 280,
+        "wires": [
+            [
+                "44bf52618b19c2ee",
+                "e767cd1507b8cf42"
+            ]
+        ]
+    },
+    {
+        "id": "e42a1cf3014ba30a",
+        "type": "json",
+        "z": "4246be2ad9225d34",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1310,
+        "y": 280,
+        "wires": [
+            [
+                "3d793abcf663d0d1"
+            ]
+        ]
+    },
+    {
+        "id": "9127fb3d6e1bba72",
+        "type": "change",
+        "z": "4246be2ad9225d34",
+        "name": "Set Automatic Mode",
+        "rules": [
+            {
+                "t": "set",
+                "p": "settings.automatic",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1060,
+        "y": 680,
+        "wires": [
+            [
+                "1b669ae440dae0e1"
+            ]
+        ]
+    },
+    {
+        "id": "44bf52618b19c2ee",
+        "type": "change",
+        "z": "4246be2ad9225d34",
+        "name": "Update Autmatic Button",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "settings.automatic",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1730,
+        "y": 280,
+        "wires": [
+            [
+                "c61f06b8cfecf171"
+            ]
+        ]
+    },
+    {
+        "id": "496bbb5b5e08b6a5",
+        "type": "link in",
+        "z": "4246be2ad9225d34",
+        "name": "",
+        "links": [
+            "c61f06b8cfecf171"
+        ],
+        "x": 745,
+        "y": 700,
+        "wires": [
+            [
+                "82f20472daf5f4ba"
+            ]
+        ]
+    },
+    {
+        "id": "c61f06b8cfecf171",
+        "type": "link out",
+        "z": "4246be2ad9225d34",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "496bbb5b5e08b6a5"
+        ],
+        "x": 1895,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "992fb15cb915b8df",
+        "type": "ui_text",
+        "z": "4246be2ad9225d34",
+        "group": "fe2a2867070506ee",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Typ öffnen:",
+        "format": "{{msg.type}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 2590,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "688640f1f08c9dc3",
+        "type": "ui_text",
+        "z": "4246be2ad9225d34",
+        "group": "fe2a2867070506ee",
+        "order": 11,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Typ schließen:",
+        "format": "{{msg.type}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 2600,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "41f89c76a060859b",
+        "type": "link in",
+        "z": "4246be2ad9225d34",
+        "name": "LoadSettingsInUI",
+        "links": [
+            "e767cd1507b8cf42"
+        ],
+        "x": 885,
+        "y": 480,
+        "wires": [
+            [
+                "800882fa6dc88908",
+                "a2a185e04b936b77",
+                "b4241d01bee35da9",
+                "4a833cdd8e8a0154"
+            ]
+        ]
+    },
+    {
+        "id": "e767cd1507b8cf42",
+        "type": "link out",
+        "z": "4246be2ad9225d34",
+        "name": "LoadSettingsInUI",
+        "mode": "link",
+        "links": [
+            "41f89c76a060859b"
+        ],
+        "x": 1625,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "800882fa6dc88908",
+        "type": "change",
+        "z": "4246be2ad9225d34",
+        "name": "Update OpenFrom",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "settings.openFrom",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 420,
+        "wires": [
+            [
+                "068d0c70bde10387"
+            ]
+        ]
+    },
+    {
+        "id": "a2a185e04b936b77",
+        "type": "change",
+        "z": "4246be2ad9225d34",
+        "name": "Update OpenUntil",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "settings.openUntil",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 460,
+        "wires": [
+            [
+                "92f543c6f93faf6a"
+            ]
+        ]
+    },
+    {
+        "id": "b4241d01bee35da9",
+        "type": "change",
+        "z": "4246be2ad9225d34",
+        "name": "Update CloseFrom",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "settings.closeFrom",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 500,
+        "wires": [
+            [
+                "2bd962fc721c32f5"
+            ]
+        ]
+    },
+    {
+        "id": "4a833cdd8e8a0154",
+        "type": "change",
+        "z": "4246be2ad9225d34",
+        "name": "Update CloseUntil",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "settings.closeUntil",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 540,
+        "wires": [
+            [
+                "c523394e0d82e04f"
+            ]
+        ]
+    },
+    {
+        "id": "03da46826e4f2b0e",
+        "type": "ui_text",
+        "z": "4246be2ad9225d34",
+        "group": "fe2a2867070506ee",
+        "order": 1,
+        "width": 5,
+        "height": 1,
+        "name": "",
+        "label": "Status:",
+        "format": "{{msg.connection}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 2940,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "02935ed5db33708a",
+        "type": "mqtt in",
+        "z": "4246be2ad9225d34",
+        "name": "GateResponse",
+        "topic": "GateResponse",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b645df176e452dbc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 2040,
+        "y": 740,
+        "wires": [
+            [
+                "d9d8ecbbb55ff5c7"
+            ]
+        ]
+    },
+    {
+        "id": "1b669ae440dae0e1",
+        "type": "time-comp",
+        "z": "4246be2ad9225d34",
+        "outputs": 1,
+        "name": "CalculateNextEventOccurrence",
+        "positionConfig": "4acc508184d7ff79",
+        "input": "payload",
+        "inputType": "msgPayload",
+        "inputFormat": "0",
+        "inputNext": false,
+        "inputOffset": 0,
+        "inputOffsetType": "none",
+        "inputOffsetMultiplier": 60000,
+        "rules": [],
+        "checkall": "true",
+        "results": [
+            {
+                "p": "next.sunrise",
+                "pt": "msg",
+                "v": "civilDawn",
+                "vt": "pdsTime",
+                "o": "",
+                "oT": "none",
+                "oM": "60000",
+                "f": 0,
+                "fS": 0,
+                "fT": "Millisekunden UNIX-Zeit",
+                "fI": "0",
+                "next": true,
+                "days": "",
+                "months": "",
+                "onlyEvenDays": false,
+                "onlyOddDays": false,
+                "onlyEvenWeeks": false,
+                "onlyOddWeeks": false
+            },
+            {
+                "p": "next.sunset",
+                "pt": "msg",
+                "v": "civilDusk",
+                "vt": "pdsTime",
+                "o": "",
+                "oT": "none",
+                "oM": "60000",
+                "f": 0,
+                "fS": 0,
+                "fT": "Millisekunden UNIX-Zeit",
+                "fI": "0",
+                "next": true,
+                "days": "",
+                "months": "",
+                "onlyEvenDays": false,
+                "onlyOddDays": false,
+                "onlyEvenWeeks": false,
+                "onlyOddWeeks": false
+            },
+            {
+                "p": "next.openFrom",
+                "pt": "msg",
+                "v": "00:00",
+                "vt": "entered",
+                "o": "settings.openFrom",
+                "oT": "flow",
+                "oM": "1",
+                "f": 0,
+                "fS": 0,
+                "fT": "Millisekunden UNIX-Zeit",
+                "fI": "0",
+                "next": true,
+                "days": "",
+                "months": "",
+                "onlyEvenDays": false,
+                "onlyOddDays": false,
+                "onlyEvenWeeks": false,
+                "onlyOddWeeks": false
+            },
+            {
+                "p": "next.openUntil",
+                "pt": "msg",
+                "v": "00:00",
+                "vt": "entered",
+                "o": "settings.openUntil",
+                "oT": "flow",
+                "oM": "1",
+                "f": 0,
+                "fS": 0,
+                "fT": "Millisekunden UNIX-Zeit",
+                "fI": "0",
+                "next": true,
+                "days": "",
+                "months": "",
+                "onlyEvenDays": false,
+                "onlyOddDays": false,
+                "onlyEvenWeeks": false,
+                "onlyOddWeeks": false
+            },
+            {
+                "p": "next.closeFrom",
+                "pt": "msg",
+                "v": "00:00",
+                "vt": "entered",
+                "o": "settings.closeFrom",
+                "oT": "flow",
+                "oM": "1",
+                "f": 0,
+                "fS": 0,
+                "fT": "Millisekunden UNIX-Zeit",
+                "fI": "0",
+                "next": true,
+                "days": "",
+                "months": "",
+                "onlyEvenDays": false,
+                "onlyOddDays": false,
+                "onlyEvenWeeks": false,
+                "onlyOddWeeks": false
+            },
+            {
+                "p": "next.closeUntil",
+                "pt": "msg",
+                "v": "00:00",
+                "vt": "entered",
+                "o": "settings.closeUntil",
+                "oT": "flow",
+                "oM": "1",
+                "f": 0,
+                "fS": 0,
+                "fT": "Millisekunden UNIX-Zeit",
+                "fI": "0",
+                "next": true,
+                "days": "",
+                "months": "",
+                "onlyEvenDays": false,
+                "onlyOddDays": false,
+                "onlyEvenWeeks": false,
+                "onlyOddWeeks": false
+            },
+            {
+                "p": "today.sunrise",
+                "pt": "msg",
+                "v": "civilDawn",
+                "vt": "pdsTime",
+                "o": "",
+                "oT": "none",
+                "oM": "60000",
+                "f": 0,
+                "fS": 0,
+                "fT": "Millisekunden UNIX-Zeit",
+                "fI": "0",
+                "next": false,
+                "days": "",
+                "months": "",
+                "onlyEvenDays": false,
+                "onlyOddDays": false,
+                "onlyEvenWeeks": false,
+                "onlyOddWeeks": false
+            },
+            {
+                "p": "today.sunset",
+                "pt": "msg",
+                "v": "civilDusk",
+                "vt": "pdsTime",
+                "o": "",
+                "oT": "none",
+                "oM": "60000",
+                "f": 0,
+                "fS": 0,
+                "fT": "Millisekunden UNIX-Zeit",
+                "fI": "0",
+                "next": false,
+                "days": "",
+                "months": "",
+                "onlyEvenDays": false,
+                "onlyOddDays": false,
+                "onlyEvenWeeks": false,
+                "onlyOddWeeks": false
+            }
+        ],
+        "x": 1870,
+        "y": 680,
+        "wires": [
+            [
+                "cff3e6d5f5835154"
+            ]
+        ]
+    },
+    {
+        "id": "cff3e6d5f5835154",
+        "type": "function",
+        "z": "4246be2ad9225d34",
+        "name": "CalculateOpenCloseEvent",
+        "func": "    const settings = flow.get(\"settings\");\n\n    const limit = {\n        openFrom : 1,\n        openUntil : 2,\n        closeFrom : 3,\n        closeUntil : 4,\n        sunset : 5,\n        sunrise : 6,\n    };\n\nconst timeNow = new Date().getTime();\n\nopen = calculate(msg.next.sunrise,settings.openFrom,settings.openUntil);\nswitch(open.type){\n    case \"start\":\n        open.type = 1;\n        break;\n    case \"sun\":\n        open.type = 6;\n        break;\n    case \"end\":\n        open.type = 2;\n        break;\n}\n\nclose = calculate(msg.next.sunset,settings.closeFrom,settings.closeUntil);\nswitch(close.type){\n    case \"start\":\n        close.type = 3;\n        break;\n    case \"sun\":\n        close.type = 5;\n        break;\n    case \"end\":\n        close.type = 4;\n        break;\n}\n\nreturn {topic:\"update\", open, close};\n\n\n\nfunction calculate(baseTime,start,end){\n    const sun = new Date(baseTime);\n    const from = new Date(baseTime).setHours(0,0,0,start);\n    const until = new Date(baseTime).setHours(0,0,0,end);\n\n    var result = {\n        type : 0,\n        time : null,\n        delta : null,\n    }\n    \n    if(sun < from){\n        result.type = \"start\";\n        result.time = from;\n    }else if(sun > from && sun < until){\n        result.type = \"sun\";\n        result.time = sun;\n    }else if(sun > until){\n        result.type = \"end\";\n        result.time = until;\n    }\n    const timeNow = new Date().getTime();\n    result.delta = (result.time - timeNow);\n    \n    if(result.delta < 0){\n        result.time = new Date(result.time).setDate(new Date(result.time).getDate() + 1);\n        result.delta = (result.time - timeNow);\n    }\n    \n    return result;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2140,
+        "y": 680,
+        "wires": [
+            [
+                "22050b49189732fc",
+                "f6f4146136ebd92e"
+            ]
+        ]
+    },
+    {
+        "id": "22050b49189732fc",
+        "type": "function",
+        "z": "4246be2ad9225d34",
+        "name": "TextCoversion",
+        "func": "const eventName = [\n    \"Unbekannt\",\n    \"Zeitschaltuhr 1\",\n    \"Zeitschaltuhr 2\",\n    \"Zeitschaltuhr 3\",\n    \"Zeitschaltuhr 4\",\n    \"Abenddämmerung\",\n    \"Morgendämmerung\"]\n    \nconst automatic = flow.get(\"settings\").automatic;\n\nconst timeOpen = new Date(msg.open.time).toLocaleTimeString('en-US', { hour12: false });\nconst timeClose = new Date(msg.close.time).toLocaleTimeString('en-US', { hour12: false });\n\nif(automatic){\n    return [{time : (timeOpen + \" in \" + convertMsToTime(msg.open.delta)),\n            type : eventName[msg.open.type]},\n            {time : (timeClose + \" in \" + convertMsToTime(msg.close.delta)),\n            type : eventName[msg.close.type]}];\n}else{\n    return [{time : \"Handbetrieb\", type : \"Handbetrieb\"},\n            {time : \"Handbetrieb\", type : \"Handbetrieb\"}];\n}\n\n// source: https://bobbyhadz.com/blog/javascript-convert-milliseconds-to-hours-minutes-seconds\n// ✅ Or create a reusable function\nfunction padTo2Digits(num) {\n  return num.toString().padStart(2, '0');\n}\n\nfunction convertMsToTime(milliseconds) {\n  let seconds = Math.floor(milliseconds / 1000);\n  let minutes = Math.floor(seconds / 60);\n  let hours = Math.floor(minutes / 60);\n\n  seconds = seconds % 60;\n  minutes = minutes % 60;\n\n  // 👇️ If you don't want to roll hours over, e.g. 24 to 00\n  // 👇️ comment (or remove) the line below\n  // commenting next line gets you `24:00:00` instead of `00:00:00`\n  // or `36:15:31` instead of `12:15:31`, etc.\n  hours = hours % 24;\n\n  return `${padTo2Digits(hours)}:${padTo2Digits(minutes)}:${padTo2Digits(\n    seconds,\n  )}`;\n}\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2380,
+        "y": 440,
+        "wires": [
+            [
+                "390bfbcace314a8a",
+                "992fb15cb915b8df",
+                "d3af309481ef3079"
+            ],
+            [
+                "0ac701293b1286f3",
+                "688640f1f08c9dc3",
+                "f41f8d77a874ae3a"
+            ]
+        ],
+        "outputLabels": [
+            "Open",
+            "Close"
+        ]
+    },
+    {
+        "id": "f6f4146136ebd92e",
+        "type": "function",
+        "z": "4246be2ad9225d34",
+        "name": "GateController",
+        "func": "var outputStateText;\nvar outputConnectionStateText;\nvar outputPositionText;\nvar outputTemperatureText;\nvar outputCommand;\n\nconst gateState = {\n    unknown : 0,\n    opened : 1,\n    opening : 2,\n    closed : 3,\n    closing : 4\n}\n\nconst gateStateText = [\n    \"Unbekannt\",\n    \"geöffnet\",\n    \"öffnet\",\n    \"geschlossen\",\n    \"schließt\"];\n    \nconst gateConnectionText = [\n    \"Verbunden\",\n    \"keine Verbindung\"];\n\n// calculate current gate state (opened or closed)\nconst timeNow = new Date().getTime();\nif(msg.hasOwnProperty(\"open\")){\n    const diffOpen = new Date(msg.open.time) - timeNow;\n    const diffClose = new Date(msg.close.time) - timeNow;\n    var targetState = gateState.unknown;\n    if(diffOpen < diffClose)\n        targetState = gateState.closed;\n    else if (diffClose< diffOpen)\n        targetState = gateState.opened;\n}\n\n// create flow variabels if not exist\nvar settings = flow.get(\"settings\");\nif(!settings.hasOwnProperty(\"state\")){\n    settings.state = 0;\n}\nif(!settings.hasOwnProperty(\"lastConnection\")){\n    settings.lastConnection = timeNow;\n}\nif(!settings.hasOwnProperty(\"lastConnection\")){\n    settings.connected = false;\n}\n\n// connection\nconst timeSinceLastConnection = timeNow - settings.lastConnection;\nif (timeSinceLastConnection < 10000){\n    // connected\n    settings.connected = true;\n    outputConnectionStateText = gateConnectionText[0]; \n}\nelse{\n    // not connected\n    settings.connected = false;\n    settings.state = 0;\n    outputConnectionStateText = gateConnectionText[1];\n    outputStateText = gateStateText[0];\n    outputPositionText = gateStateText[0];\n    outputTemperatureText = gateStateText[0];\n}\n    \n// response from gatecontroller\nif(msg.hasOwnProperty(\"topic\")){\n    if(msg.topic == \"GateResponse\"){\n        outputStateText =  gateStateText[msg.payload.state];\n        settings.state = msg.payload.state;\n        outputPositionText = msg.payload.position;\n        outputTemperatureText = msg.payload.temperature.toFixed(2).toString() + \" °C\";\n        settings.lastConnection = timeNow;\n    }\n}\n\n\n// Automatic Eventrigger\nif(settings.connected && settings.state != targetState && settings.automatic){\n    outputCommand = targetState;\n}\n\nif(msg.hasOwnProperty(\"topic\")){\n    if(msg.topic == \"manual\"){\n        if(msg.payload == \"open\"){\n            outputCommand = gateState.opened;\n            settings.state = gateState.opened;\n        }\n        else if (msg.payload == \"close\"){\n            outputCommand = gateState.closed;\n            settings.state = gateState.opened;\n        }\n    }\n}\n\nflow.set(\"settings\", settings);\n\nif(msg.hasOwnProperty(\"topic\")){\n    if(msg.topic == \"update\"){\n        if(settings.connected)\n            return [{payload:{action:outputCommand}},{connection:outputConnectionStateText}];\n    }\n}\n\nreturn [{payload:{action:outputCommand}},\n        {state:outputStateText,\n        connection:outputConnectionStateText,\n        position:outputPositionText,\n        temperature:outputTemperatureText}];",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2420,
+        "y": 800,
+        "wires": [
+            [
+                "c04d72c073e78ea9"
+            ],
+            [
+                "12c8f86fadaf1095",
+                "62e55b353afafda7",
+                "afc8f04a11b2e31c",
+                "c0ebdbf630b78abf",
+                "9f7292fac2fbe0a2",
+                "03da46826e4f2b0e"
+            ]
+        ],
+        "outputLabels": [
+            "MQTT",
+            "Text"
+        ]
+    },
+    {
+        "id": "c04d72c073e78ea9",
+        "type": "switch",
+        "z": "4246be2ad9225d34",
+        "name": "",
+        "property": "payload.action",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 2610,
+        "y": 720,
+        "wires": [
+            [
+                "9ad464d0dfa786e7"
+            ]
+        ]
+    },
+    {
+        "id": "c2707761aa142169",
+        "type": "ui_text",
+        "z": "4246be2ad9225d34",
+        "group": "fe2a2867070506ee",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Position:",
+        "format": "{{msg.position}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 2940,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "d9d8ecbbb55ff5c7",
+        "type": "json",
+        "z": "4246be2ad9225d34",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 2210,
+        "y": 740,
+        "wires": [
+            [
+                "f6f4146136ebd92e"
+            ]
+        ]
+    },
+    {
+        "id": "9f330db72a4a7f37",
+        "type": "debug",
+        "z": "4246be2ad9225d34",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2750,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "12c8f86fadaf1095",
+        "type": "ui_text",
+        "z": "4246be2ad9225d34",
+        "d": true,
+        "group": "fe2a2867070506ee",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Temperatur:",
+        "format": "{{msg.temperature}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 2750,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "1a91552de9e08ff9",
+        "type": "inject",
+        "z": "4246be2ad9225d34",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1580,
+        "y": 660,
+        "wires": [
+            [
+                "1b669ae440dae0e1"
+            ]
+        ]
+    },
+    {
+        "id": "aee48b039ad81cb1",
+        "type": "ui_led",
+        "z": "4246be2ad9225d34",
+        "order": 2,
+        "group": "fe2a2867070506ee",
+        "width": 1,
+        "height": 1,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "keine Verbindung",
+                "valueType": "str"
+            },
+            {
+                "color": "#00ff00",
+                "value": "Verbunden",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": false,
+        "name": "connectionLED",
+        "x": 2960,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "e24bbd0a2a4791f5",
+        "type": "ui_led",
+        "z": "4246be2ad9225d34",
+        "order": 5,
+        "group": "fe2a2867070506ee",
+        "width": 1,
+        "height": 1,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ffdd00",
+                "value": "geöffnet",
+                "valueType": "str"
+            },
+            {
+                "color": "#0040ff",
+                "value": "geschlossen",
+                "valueType": "str"
+            },
+            {
+                "color": "#787878",
+                "value": "Unbekannt",
+                "valueType": "str"
+            },
+            {
+                "color": "#ff0000",
+                "value": "öffnet",
+                "valueType": "str"
+            },
+            {
+                "color": "#bb00ff",
+                "value": "schließt",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": false,
+        "name": "gateLED",
+        "x": 2940,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "62e55b353afafda7",
+        "type": "change",
+        "z": "4246be2ad9225d34",
+        "name": "msg.connection",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "connection",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2760,
+        "y": 820,
+        "wires": [
+            [
+                "aee48b039ad81cb1"
+            ]
+        ]
+    },
+    {
+        "id": "afc8f04a11b2e31c",
+        "type": "change",
+        "z": "4246be2ad9225d34",
+        "name": "msg.state",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "state",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2740,
+        "y": 920,
+        "wires": [
+            [
+                "e24bbd0a2a4791f5"
+            ]
+        ]
+    },
+    {
+        "id": "668615405d7bba96",
+        "type": "ui_led",
+        "z": "4246be2ad9225d34",
+        "order": 3,
+        "group": "6ea7bc03a327e910",
+        "width": 1,
+        "height": 1,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#a1a1a1",
+                "value": "null",
+                "valueType": "str"
+            },
+            {
+                "color": "#00ff00",
+                "value": "Zeitschaltuhr 1",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": false,
+        "name": "openFromLED",
+        "x": 2840,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "525d6db69300830e",
+        "type": "ui_led",
+        "z": "4246be2ad9225d34",
+        "order": 5,
+        "group": "6ea7bc03a327e910",
+        "width": 1,
+        "height": 1,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#a1a1a1",
+                "value": "null",
+                "valueType": "str"
+            },
+            {
+                "color": "#00ff00",
+                "value": "Zeitschaltuhr 2",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": false,
+        "name": "openUntilLED",
+        "x": 2840,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "89211ec1c7bee781",
+        "type": "ui_led",
+        "z": "4246be2ad9225d34",
+        "order": 7,
+        "group": "6ea7bc03a327e910",
+        "width": 1,
+        "height": 1,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#a1a1a1",
+                "value": "null",
+                "valueType": "str"
+            },
+            {
+                "color": "#00ff00",
+                "value": "Zeitschaltuhr 3",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": false,
+        "name": "closeFromLED",
+        "x": 2840,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "682a86498b78d0eb",
+        "type": "ui_led",
+        "z": "4246be2ad9225d34",
+        "order": 9,
+        "group": "6ea7bc03a327e910",
+        "width": 1,
+        "height": 1,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#a1a1a1",
+                "value": "null",
+                "valueType": "str"
+            },
+            {
+                "color": "#00ff00",
+                "value": "Zeitschaltuhr 4",
+                "valueType": "str"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": false,
+        "name": "closeUntilLED",
+        "x": 2840,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "d3af309481ef3079",
+        "type": "change",
+        "z": "4246be2ad9225d34",
+        "name": "type",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "type",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2570,
+        "y": 420,
+        "wires": [
+            [
+                "668615405d7bba96",
+                "525d6db69300830e"
+            ]
+        ]
+    },
+    {
+        "id": "f41f8d77a874ae3a",
+        "type": "change",
+        "z": "4246be2ad9225d34",
+        "name": "type",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "type",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2570,
+        "y": 460,
+        "wires": [
+            [
+                "89211ec1c7bee781",
+                "682a86498b78d0eb"
+            ]
+        ]
+    },
+    {
+        "id": "c0ebdbf630b78abf",
+        "type": "switch",
+        "z": "4246be2ad9225d34",
+        "name": "",
+        "property": "position",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 2730,
+        "y": 980,
+        "wires": [
+            [
+                "c2707761aa142169"
+            ]
+        ]
+    },
+    {
+        "id": "9f7292fac2fbe0a2",
+        "type": "switch",
+        "z": "4246be2ad9225d34",
+        "name": "",
+        "property": "state",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 2730,
+        "y": 880,
+        "wires": [
+            [
+                "392ea841002fcbf5"
+            ]
+        ]
+    },
+    {
+        "id": "0860f571d8b49ed5",
+        "type": "ui_spacer",
+        "z": "4246be2ad9225d34",
+        "name": "spacer",
+        "group": "ae2d9770e1ba0892",
+        "order": 4,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "b645df176e452dbc",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mqtt",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "936e1e4f72a9d5af",
+        "type": "ui_group",
+        "name": "Steuerung",
+        "tab": "05c67b87e1cf52ee",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "6ea7bc03a327e910",
+        "type": "ui_group",
+        "name": "Einstellungen",
+        "tab": "05c67b87e1cf52ee",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "fe2a2867070506ee",
+        "type": "ui_group",
+        "name": "Status",
+        "tab": "05c67b87e1cf52ee",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4acc508184d7ff79",
+        "type": "position-config",
+        "name": "Lübstorf",
+        "isValide": "true",
+        "longitude": "0",
+        "latitude": "0",
+        "angleType": "deg",
+        "timeZoneOffset": "99",
+        "timeZoneDST": "0",
+        "stateTimeFormat": "3",
+        "stateDateFormat": "12",
+        "contextStore": ""
+    },
+    {
+        "id": "05c67b87e1cf52ee",
+        "type": "ui_tab",
+        "name": "Hünerstallsteuerung",
+        "icon": "check",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]
